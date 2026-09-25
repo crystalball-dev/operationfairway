@@ -59,9 +59,9 @@ export const site = {
   /** Where the contact form + mailto fallback point. TODO(label): confirm the inbox. */
   email: "hello@operationfairway.org",
   /** What the contact page invites. Shown as the intro line. */
-  contactIntro: "Demos, licensing, sync, press, or to tell us the colors are too loud.",
+  contactIntro: "Demos, licensing, sync, press, or to bitch about the colors.",
   /** One line of demo guidance under the form. Leave empty to hide. */
-  demoNote: "Demos: a private link beats an attachment. Two tracks, no bio needed.",
+  demoNote: "Demos: a private link beats an attachment. Two tracks, no bio needed. Let the music talk.",
   /** Storefront listing everything for sale. Shown as a button on the merch page; leave empty to hide. */
   merchStoreUrl: "https://kunaki.com/msales.asp?PublisherId=249214&pp=1",
   /** Button text for `merchStoreUrl`. */
