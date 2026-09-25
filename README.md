@@ -43,7 +43,9 @@ Everything editable lives in `src/content/`:
 - **`artists.ts`** — the roster. Name (in the artist's own case), tagline, bio, genres, `website`, `socials`, optional pinned `palette`, optional `image`/`imageVideo` overrides, and `tracks` for music hosted on SoundCloud (each becomes a click-to-load player on the artist page). `featured: true` pins an artist to the front; `since` shows the year they joined.
 - **`releases.ts`** — every record across the label, each with `artist: "<slug>"`. Dates, tracklists, streaming links, videos, credits. Undated releases show "Coming soon" and sort to the top. `featured: true` decides which of two same-day records leads. Set `label` only on a record that came out elsewhere; set `catalogNumber` to pin one.
 - **`merch.ts`** — one entry per product, each linking to where it is sold, with an optional `artist`.
-- **`site.ts`** — label name, URL, tagline, bio, email, contact copy, catalog prefix, storefront button, socials, nav.
+- **`site.ts`** — label name, legal name, URL, tagline, bio, location, email, contact copy, catalog prefix, storefront button, socials, nav, privacy date.
+
+The brand is plain `OPERATION FAIRWAY` everywhere a visitor reads it. The company name from the Alaska filing (`site.legalName`, "OPERATION FAIRWAY, LLC") appears only where the law cares: the copyright line in the footer and the Organization structured data, which also carries the formation date, the NAICS code and a city-level address. The registered street address is a home and is deliberately not on the site; `site.address` stops at city, state and country.
 - **`covers.generated.json`** — the artwork manifest written by `npm run covers`. Commit it.
 
 ## Artwork pipeline: `_ANIMATIONS` → site
@@ -106,6 +108,7 @@ src/
     artists/              index + [slug] page + per-artist opengraph-image
     releases/             index + [slug] page + per-release opengraph-image
     merch/  contact/
+    privacy/              plain-words privacy page; keep it in step with what the code does
     api/contact/route.ts  form delivery (Resend REST API)
     opengraph-image.tsx   site-wide social card
     robots.ts sitemap.ts manifest.ts icon.svg apple-icon.png

@@ -63,9 +63,16 @@ export function Footer() {
           </div>
         </div>
 
-        <p className="label mt-14 text-muted">
-          © {year} {site.name} · All rights reserved.
-        </p>
+        {/* The legal line carries the company name; the brand stays plain
+            OPERATION FAIRWAY everywhere else. */}
+        <div className="label mt-14 flex flex-wrap items-center gap-x-6 gap-y-2 text-muted">
+          <span>
+            © {year} {site.legalName} · All rights reserved.
+          </span>
+          <Link href="/privacy" className="underline-offset-4 hover:underline">
+            Privacy
+          </Link>
+        </div>
       </div>
     </footer>
   );

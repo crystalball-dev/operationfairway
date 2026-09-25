@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { ContactForm } from "@/components/contact-form";
 import { SectionHeading } from "@/components/section-heading";
 import { site } from "@/content/site";
@@ -46,6 +47,12 @@ export default function ContactPage() {
         </div>
         <div className="md:col-span-6 md:col-start-7">
           <ContactForm email={site.email} />
+          <p className="label mt-6 text-muted">
+            Your details are used only to reply.{" "}
+            <Link href="/privacy" className="underline-offset-4 hover:underline">
+              Privacy
+            </Link>
+          </p>
         </div>
       </div>
     </div>

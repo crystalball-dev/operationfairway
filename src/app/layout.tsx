@@ -63,13 +63,25 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
+// The company behind the brand, at city level only: the registered address
+// is a home and stays off the site.
 const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "Organization",
   name: site.name,
+  legalName: site.legalName,
   url: site.url,
+  logo: `${site.url}/brand/icon-512.png`,
   email: site.email,
   description: site.bio.join(" "),
+  foundingDate: site.founded,
+  naics: site.naics,
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: site.address.locality,
+    addressRegion: site.address.region,
+    addressCountry: site.address.country,
+  },
   sameAs: site.socials.map((s) => s.href),
   member: sortedArtists.map((a) => ({ "@type": "MusicGroup", name: a.name, url: `${site.url}/artists/${a.slug}` })),
 };

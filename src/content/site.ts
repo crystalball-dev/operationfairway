@@ -16,28 +16,46 @@ const nbsp = String.fromCharCode(0xa0);
  * allcaps rule.
  */
 export const site = {
-  /** The label. Allcaps, always. */
+  /** The label, as a brand. Allcaps, always. */
   name: "OPERATION FAIRWAY",
+  /**
+   * The company behind the brand, from the Alaska articles of organization.
+   * Used only where the law cares: the copyright line and structured data.
+   * Everywhere else the label is plain OPERATION FAIRWAY.
+   */
+  legalName: "OPERATION FAIRWAY, LLC",
+  /** Date the company was organized (ISO). Shown nowhere; feeds structured data. */
+  founded: "2026-09-24",
+  /** NAICS code from the articles of organization: record production and distribution. Structured data only. */
+  naics: "512250",
   /** Canonical URL. Override per-environment with NEXT_PUBLIC_SITE_URL. */
   url: (process.env.NEXT_PUBLIC_SITE_URL || "https://operationfairway.org").replace(/\/$/, ""),
   /** One-line hook, shown in the hero and used in page titles. */
   tagline: "Records from the Zone.",
   /** SEO description (~150 chars). */
   description:
-    "OPERATION FAIRWAY is an independent record label. Home of ojinyx, Random Thoth and the minimal musketeer. Artists, releases, merch and contact.",
+    "OPERATION FAIRWAY is an independent record label out of Alaska. Home of ojinyx, Random Thoth and the minimal musketeer. Artists, releases, merch and contact.",
   /**
    * Bio paragraphs, shown in the home page About section and in search
    * structured data. American English throughout. Each paragraph ends on a
    * short sign-off joined with `nbsp`, so it never wraps mid-phrase.
    */
   bio: [
-    `OPERATION FAIRWAY is an independent record label. Electronic, hip hop, experimental, and whatever sits in between. One rule: no two records${nbsp}alike.`,
+    `OPERATION FAIRWAY is an independent record label out of Alaska. Electronic, hip hop, experimental, and whatever sits in between. One rule: no two records${nbsp}alike.`,
     `Every artist on the roster runs their own world. The label is the frame. The colors on this site come straight from the covers. Enjoy${nbsp}responsibly.`,
   ],
   /** Closing line of the bio, set as a refrain. Keep verbatim. */
   refrain: "Get lost in the Zone, stalker.",
-  /** Optional. Shown in the footer and about section; leave empty to hide. TODO(label). */
-  location: "",
+  /** Where the label is based, at city level. Shown in the footer and about section; leave empty to hide. */
+  location: "Wasilla, Alaska",
+  /** Short form of the same, for the hero line ("Independent record label · Alaska"). */
+  homeBase: "Alaska",
+  /**
+   * City-level postal address for structured data, so search engines place
+   * the label on a map. Never put the street here: the site is public and
+   * the registered address is a home.
+   */
+  address: { locality: "Wasilla", region: "AK", country: "US" },
   /** Where the contact form + mailto fallback point. TODO(label): confirm the inbox. */
   email: "hello@operationfairway.org",
   /** What the contact page invites. Shown as the intro line. */
@@ -63,6 +81,8 @@ export const site = {
     { label: "SoundCloud", href: "" },
     { label: "YouTube", href: "" },
   ].filter((s): s is SocialLink => Boolean(s.href)),
+  /** Date the privacy page was last changed (ISO). Bump it when the page changes. */
+  privacyUpdated: "2026-09-24",
 };
 
 export type Site = typeof site;

@@ -69,7 +69,7 @@ export default async function HomePage() {
 
         <div className="gutter relative flex min-h-[100svh] flex-col justify-between pb-8 pt-24 md:pt-28">
           <div className="hero-fade flex items-center justify-between gap-4">
-            <span className="label text-muted">Independent record label</span>
+            <span className="label text-muted">Independent record label{site.homeBase ? ` · ${site.homeBase}` : ""}</span>
             <span className="label hidden text-accent sm:inline">
               {roster.length} {roster.length === 1 ? "artist" : "artists"}
             </span>
