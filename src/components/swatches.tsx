@@ -1,0 +1,21 @@
+import type { Palette } from "@/lib/palette";
+
+/** The raw colors behind a theme — a small, honest "here's where the color world came from". */
+export function Swatches({ palette }: { palette: Palette }) {
+  const note =
+    palette.source === "extracted"
+      ? `${palette.mode} theme · ${palette.swatches.length} colors extracted from the artwork`
+      : palette.source === "brand"
+        ? `${palette.mode} theme · pinned by the artist`
+        : "artwork unavailable · label palette in use";
+  return (
+    <div className="flex flex-col gap-3">
+      <div className="flex h-4 overflow-hidden rounded-full ring-1 ring-current/15">
+        {palette.swatches.map((hex, i) => (
+          <span key={`${hex}-${i}`} className="flex-1" style={{ background: hex }} title={hex} />
+        ))}
+      </div>
+      <p className="label text-muted">{note}</p>
+    </div>
+  );
+}

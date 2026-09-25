@@ -1,0 +1,87 @@
+{
+  "generatedAt": "2026-09-24T00:00:00.000Z",
+  "artists": {
+    "ojinyx": {
+      "source": "_ANIMATIONS/ojinyx/MAIN/DONE/MAIN_2.mp4",
+      "hash": "4c192279",
+      "width": 1080,
+      "height": 1080,
+      "duration": 9.43,
+      "hasAudio": false,
+      "poster": "/artists/ojinyx.4c192279.jpg",
+      "mp4": "/artists/ojinyx-sm.4c192279.mp4",
+      "mp4Small": "/artists/ojinyx-sm.4c192279.mp4",
+      "bytes": {
+        "mp4": 3181821,
+        "mp4Small": 3181821,
+        "poster": 395135
+      }
+    }
+  },
+  "covers": {
+    "kingdoms": {
+      "source": "_ANIMATIONS/ojinyx/KINGDOMS/DONE/kingdoms_ojinyx.mp4",
+      "hash": "08cd5ebb",
+      "width": 1080,
+      "height": 1080,
+      "duration": 9.97,
+      "hasAudio": true,
+      "poster": "/covers/kingdoms.08cd5ebb.jpg",
+      "mp4": "/covers/kingdoms.08cd5ebb.mp4",
+      "mp4Small": "/covers/kingdoms-sm.08cd5ebb.mp4",
+      "bytes": {
+        "mp4": 2529622,
+        "mp4Small": 471837,
+        "poster": 228777
+      }
+    },
+    "war-on-drugs": {
+      "source": "_ANIMATIONS/ojinyx/WAR ON DRUGS/DONE/WAR_ON_DRUGS_ojinyx.mp4",
+      "hash": "c5b53b18",
+      "width": 1080,
+      "height": 1080,
+      "duration": 7.93,
+      "hasAudio": true,
+      "poster": "/covers/war-on-drugs.c5b53b18.jpg",
+      "mp4": "/covers/war-on-drugs.c5b53b18.mp4",
+      "mp4Small": "/covers/war-on-drugs-sm.c5b53b18.mp4",
+      "bytes": {
+        "mp4": 4207187,
+        "mp4Small": 706229,
+        "poster": 105514
+      }
+    },
+    "the-hills": {
+      "source": "_ANIMATIONS/ojinyx/BUNNY/DONE/BUNNY_ojinyx.mp4",
+      "hash": "e25247cf",
+      "width": 1080,
+      "height": 1080,
+      "duration": 9.13,
+      "hasAudio": true,
+      "poster": "/covers/the-hills.e25247cf.jpg",
+      "mp4": "/covers/the-hills.e25247cf.mp4",
+      "mp4Small": "/covers/the-hills-sm.e25247cf.mp4",
+      "bytes": {
+        "mp4": 4341208,
+        "mp4Small": 783440,
+        "poster": 278396
+      }
+    },
+    "ojinyx": {
+      "source": "_ANIMATIONS/ojinyx/OJINYX/DONE/OJINYX.mp4",
+      "hash": "0e573d7c",
+      "width": 1080,
+      "height": 1080,
+      "duration": 9.3,
+      "hasAudio": true,
+      "poster": "/covers/ojinyx.0e573d7c.jpg",
+      "mp4": "/covers/ojinyx.0e573d7c.mp4",
+      "mp4Small": "/covers/ojinyx-sm.0e573d7c.mp4",
+      "bytes": {
+        "mp4": 5494236,
+        "mp4Small": 589271,
+        "poster": 615510
+      }
+    }
+  }
+}
