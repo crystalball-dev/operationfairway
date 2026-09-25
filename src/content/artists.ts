@@ -52,11 +52,12 @@ export const artists: Artist[] = [
   {
     slug: "random-thoth",
     name: "Random Thoth",
-    // TODO(label): bio drafted from the artist's own SoundCloud descriptions — confirm with them before launch.
-    tagline: "Acid, on the softer side.",
+    // Bio written by the label, 2026-09-24. Keep verbatim.
+    tagline: "Acid, the slow burn.",
     bio: [
-      "Random Thoth is acid techno with the edges sanded: warm TB-303 lines, old-school drum machines and a head full of Detroit, forged in Dallas and now transmitting from Anchorage, Alaska.",
-      "Nostalgic on purpose. Loud by default.",
+      "Random Thoth is acid techno buffed and polished. Warm TB-303 lines. Old-school drum machines. A head full of Detroit.",
+      "Forged in Dallas, now coming at you live from Anchorage, Alaska.",
+      "Loud by default.",
     ],
     genres: ["Acid Techno", "Detroit Techno", "IDM"],
     // TODO(label): placeholder key art (the RANDOM THOTH SoundCloud avatar, 500²). Replace with proper art via _ANIMATIONS/random-thoth/MAIN.
@@ -100,11 +101,12 @@ export const artists: Artist[] = [
   {
     slug: "the-minimal-musketeer",
     name: "the minimal musketeer",
-    // TODO(label): bio drafted from the artist's own SoundCloud descriptions — confirm with them before launch.
-    tagline: "Harder. Colder. Minimal.",
+    // Bio written by the label, 2026-09-24. Keep verbatim.
+    tagline: "Strong. Cold. Minimal.",
     bio: [
-      "the minimal musketeer is a series, not a project: hard, minimal, acid-scorched techno built on the 303, the 808 and the 909, one Musketeer at a time.",
-      "Each one marches a little harder than the last.",
+      "the minimal musketeer is a series, not a project. Years of experience etched into the hardest acid techno.",
+      "Minimal. Just like the 303s, 808s and 909s carrying the groove.",
+      "Loud by choice.",
     ],
     genres: ["Minimal Techno", "Hard Techno", "Acid Techno"],
     // TODO(label): placeholder key art (the MARCH TO THE ACID STAR SHIP artwork, 500²). Replace via _ANIMATIONS/the-minimal-musketeer/MAIN.
