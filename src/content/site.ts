@@ -42,7 +42,7 @@ export const site = {
    */
   bio: [
     `OPERATION FAIRWAY is an independent record label out of Alaska. Electronic, hip hop, experimental, and whatever sits in between. One rule: no two records${nbsp}alike.`,
-    `Every artist on the roster runs their own world. The label is the frame. The colors on this site come straight from the covers. Enjoy${nbsp}responsibly.`,
+    `Every artist on the roster runs their own world. Each one delivering a new reality for your listening pleasure. Enjoy${nbsp}responsibly.`,
   ],
   /** Closing line of the bio, set as a refrain. Keep verbatim. */
   refrain: "Get lost in the Zone, stalker.",
