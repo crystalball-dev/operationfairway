@@ -163,7 +163,7 @@ Everything marked `TODO(label)` in `src/content/` is placeholder or unconfirmed.
 
 What is still placeholder, as of the first build:
 
-- `hello@operationfairway.org` as the contact inbox, and the label's own social profiles (all empty, so the "Elsewhere" blocks show "Links coming soon").
+- The label's own social profiles (all empty, so the "Elsewhere" blocks show "Links coming soon").
 - Random Thoth and the minimal musketeer: key art is a 500² SoundCloud image each. Neither has a release on the label yet, so their pages lead with their SoundCloud tracks.
 - Per-release descriptions.
 

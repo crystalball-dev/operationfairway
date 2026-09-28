@@ -56,7 +56,7 @@ export const site = {
    * the registered address is a home.
    */
   address: { locality: "Wasilla", region: "AK", country: "US" },
-  /** Where the contact form + mailto fallback point. TODO(label): confirm the inbox. */
+  /** The label's inbox (Google Workspace). Shown site-wide; the contact form and mailto fallback point here. ojinyx.com uses it too. */
   email: "hello@operationfairway.org",
   /** What the contact page invites. Shown as the intro line. */
   contactIntro: "Demos, licensing, sync, press, or to bitch about the colors.",
