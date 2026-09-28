@@ -94,7 +94,7 @@ export default async function HomePage() {
                   ) : null}
                 </div>
               </div>
-              <LabelBadge text={site.name} className="size-28 shrink-0 text-accent md:size-36" />
+              <LabelBadge text={site.name} id="hero-badge" className="size-28 shrink-0 text-accent md:size-36" />
             </div>
 
             <dl className="grid grid-cols-2 gap-x-6 gap-y-4 border-t border-current/15 pt-5 sm:grid-cols-4">
@@ -260,7 +260,7 @@ export default async function HomePage() {
             ))}
             <p className="display mt-2 text-[clamp(1.5rem,3.2vw,2.75rem)] leading-tight text-accent">{site.refrain}</p>
             <div className="mt-4 flex items-center gap-6">
-              <LabelBadge text={site.name} className="size-28 shrink-0 text-accent-2 md:size-32" />
+              <LabelBadge text={site.name} id="about-badge" className="size-28 shrink-0 text-accent-2 md:size-32" />
               {site.location ? <span className="label text-muted">{site.location}</span> : null}
             </div>
           </Reveal>
