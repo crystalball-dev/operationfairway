@@ -58,6 +58,8 @@ export const site = {
   address: { locality: "Wasilla", region: "AK", country: "US" },
   /** The label's inbox (Google Workspace). Shown site-wide; the contact form and mailto fallback point here. ojinyx.com uses it too. */
   email: "hello@operationfairway.org",
+  /** Sender for the contact form's messages. Must be on a domain verified in Resend; both sites send from operationfairway.org. */
+  contactFrom: "site@operationfairway.org",
   /** What the contact page invites. Shown as the intro line. */
   contactIntro: "Demos, licensing, sync, press, or to bitch about the colors.",
   /** One line of demo guidance under the form. Leave empty to hide. */

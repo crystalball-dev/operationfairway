@@ -103,7 +103,7 @@ export function ContactForm({ email }: { email: string }) {
         ) : null}
         {status.kind === "unconfigured" ? (
           <span className="inline-flex flex-wrap items-center gap-3">
-            The inbox isn&apos;t wired up yet.
+            The form can&apos;t send right now.
             <a href={mailto} className={pillOutline + " px-4 py-2"}>
               Open your email app with this message
             </a>
