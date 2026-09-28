@@ -59,9 +59,11 @@ export async function POST(request: Request) {
   const ip = request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() || "unknown";
   if (rateLimited(ip)) return NextResponse.json({ error: "Too many messages — try again in a few minutes." }, { status: 429 });
 
-  const apiKey = process.env.RESEND_API_KEY;
-  const to = process.env.CONTACT_TO_EMAIL || site.email;
-  const from = process.env.CONTACT_FROM_EMAIL || site.contactFrom;
+  // Trimmed: a key pasted into the dashboard with a trailing space or line
+  // break is otherwise an invalid header, and fetch throws before sending.
+  const apiKey = process.env.RESEND_API_KEY?.trim();
+  const to = process.env.CONTACT_TO_EMAIL?.trim() || site.email;
+  const from = process.env.CONTACT_FROM_EMAIL?.trim() || site.contactFrom;
   if (!apiKey || !to || !from) {
     return NextResponse.json({ error: "Contact form is not configured." }, { status: 503 });
   }
