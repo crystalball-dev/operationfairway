@@ -17,7 +17,8 @@ export function zoneOf(show: Show): string {
   return show.timeZone && isValidZone(show.timeZone) ? show.timeZone : DEFAULT_TIME_ZONE;
 }
 
-function isWellFormed(show: Show): boolean {
+/** Date and times parse; anything else is left off every page rather than guessed at. */
+export function isWellFormedShow(show: Show): boolean {
   return (
     DATE.test(show.date) &&
     !Number.isNaN(Date.parse(show.date)) &&
@@ -51,7 +52,7 @@ export function showWindow(show: Show): ShowWindow {
  * Entries with a malformed date or time are left out rather than guessed at.
  */
 export function splitShows(list: Show[], now: number = Date.now()): { upcoming: Show[]; past: Show[] } {
-  const timed = list.filter(isWellFormed).map((show) => ({ show, ...showWindow(show) }));
+  const timed = list.filter(isWellFormedShow).map((show) => ({ show, ...showWindow(show) }));
   return {
     upcoming: timed
       .filter((s) => s.end > now)
@@ -151,7 +152,7 @@ if (process.env.NODE_ENV !== "production") {
     if (ids.has(s.id)) console.warn(`[content] duplicate show id "${s.id}"`);
     ids.add(s.id);
     if (!/^[a-z0-9-]+$/.test(s.id)) console.warn(`[content] show id "${s.id}" should be lowercase-hyphenated`);
-    if (!isWellFormed(s)) console.warn(`[content] show "${s.id}" has a malformed date or time ("YYYY-MM-DD", "HH:MM") and is hidden`);
+    if (!isWellFormedShow(s)) console.warn(`[content] show "${s.id}" has a malformed date or time ("YYYY-MM-DD", "HH:MM") and is hidden`);
     if (s.end && !s.start) console.warn(`[content] show "${s.id}" has an end time but no start time`);
     if (s.timeZone && !isValidZone(s.timeZone)) console.warn(`[content] show "${s.id}" has an unknown time zone "${s.timeZone}"; using Alaska time`);
     if (!s.artists.length) console.warn(`[content] show "${s.id}" lists no artists`);

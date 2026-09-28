@@ -111,6 +111,7 @@ src/
     merch/  contact/
     privacy/              plain-words privacy page; keep it in step with what the code does
     live/                 upcoming and past shows, plus event structured data for upcoming ones
+    shows.json/route.ts   every show as JSON (built at deploy); ojinyx.com lists its own dates from it
     api/contact/route.ts  form delivery (Resend REST API)
     opengraph-image.tsx   site-wide social card
     robots.ts sitemap.ts manifest.ts icon.svg apple-icon.png
@@ -156,7 +157,7 @@ Everything marked `TODO(label)` in `src/content/` is placeholder or unconfirmed.
 - **Add an artist**: add an entry to `src/content/artists.ts`. Drop key art in `_ANIMATIONS/<artist>/MAIN/DONE/` and run `npm run covers`, or set `image` to a content-hashed file under `/public/artists`. Leave `palette` off to theme from the art, or pin one.
 - **Add a release**: put the finished clip in `_ANIMATIONS/<ARTIST>/<ALBUM>/DONE/`, run `npm run covers`, add an entry with the matching slug and `artist` to `src/content/releases.ts`. The page, theme, OG image, catalog number and sitemap entry are generated. Titles go in allcaps. Leave `releaseDate` off until it's announced; undated releases show "Coming soon" and sort to the top.
 - **SoundCloud-only music**: add `tracks` to the artist (title, URL, year, optional artwork URL). Anything that isn't a `soundcloud.com` URL is dropped.
-- **Add a show**: one entry in `src/content/shows.ts` with times as the flyer prints them. Nothing needs moving after the night; within the hour it drops from Upcoming to Past on its own. Add the `recording` link when there is one and the past listing leads with "Watch the set". Upcoming shows with a venue and city are also published as schema.org `MusicEvent` data, which is what search engines use for event listings. The LIVE copy ("Raw. Live." and the lines under it) is `site.live` in `site.ts`.
+- **Add a show**: one entry in `src/content/shows.ts` with times as the flyer prints them. Nothing needs moving after the night; within the hour it drops from Upcoming to Past on its own. Add the `recording` link when there is one and the past listing leads with "Watch the set". Upcoming shows with a venue and city are also published as schema.org `MusicEvent` data, which is what search engines use for event listings. The LIVE copy ("Raw. Live." and the lines under it) is `site.live` in `site.ts`. Every show is also published at `/shows.json`, and ojinyx.com lists the ones that bill `ojinyx` from there within the hour, so an ojinyx date only ever needs adding here.
 - **Merch**: `src/content/merch.ts`, one entry per product, each linking to where it is sold, with `artist` set to the slug it belongs to. Store product photos can go in as-is, white background and all: the card sets them on a light panel and blends the white away. Give image filenames a content hash, since `/merch` is cached immutably.
 - **Label bio, tagline, email, socials, contact copy**: `src/content/site.ts`. Set `catalogPrefix` to `""` to hide catalog numbers.
 
