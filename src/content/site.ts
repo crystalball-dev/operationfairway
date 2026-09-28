@@ -83,6 +83,14 @@ export const site = {
   ].filter((s): s is SocialLink => Boolean(s.href)),
   /** Date the privacy page was last changed (ISO). Bump it when the page changes. */
   privacyUpdated: "2026-09-24",
+  /** Copy for /live and the LIVE sections. Written by the label; keep verbatim. */
+  live: {
+    tagline: "Raw. Live.",
+    intro: `OPERATION FAIRWAY delivers when you need it most. Venues often 21+. Enjoy${nbsp}responsibly.`,
+    refrain: "Find your Zone, stalker.",
+    /** Shown wherever there are no upcoming dates. */
+    noDates: "No dates on the board. Yet.",
+  },
 };
 
 export type Site = typeof site;
@@ -91,6 +99,7 @@ export const NAV = [
   { href: "/", label: "HOME" },
   { href: "/artists", label: "ARTISTS" },
   { href: "/releases", label: "RELEASES" },
+  { href: "/live", label: "LIVE" },
   { href: "/merch", label: "MERCH" },
   { href: "/contact", label: "CONTACT" },
 ] as const;

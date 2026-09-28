@@ -202,3 +202,39 @@ export interface SocialLink {
   label: string;
   href: string;
 }
+
+/**
+ * One live date. Times are the venue's local wall clock, written the way
+ * the flyer has them; the site works out the real moment from `timeZone`,
+ * so a show moves from upcoming to past on its own.
+ */
+export interface Show {
+  /** Stable and unique, lowercase-hyphenated. Also the row's anchor on the page. */
+  id: string;
+  /** The night, as the promoter bills it. */
+  name: string;
+  /** Slugs from artists.ts. The show is listed on each of these artists' pages. */
+  artists: string[];
+  /** Local date the night starts, ISO: "2026-09-26". */
+  date: string;
+  /** Local start, 24-hour: "22:00". Omit while unannounced. */
+  start?: string;
+  /** Local end, 24-hour: "05:00". Earlier than `start` means it runs past midnight. */
+  end?: string;
+  /** IANA time zone of the venue. Defaults to Alaska time, "America/Anchorage". */
+  timeZone?: string;
+  venue?: string;
+  /** The venue's street address, for search engines' event listings. */
+  address?: string;
+  city?: string;
+  /** State or province, e.g. "AK". */
+  region?: string;
+  /** Two-letter country code. Defaults to "US" in structured data. */
+  country?: string;
+  /** Event page or tickets. */
+  url?: string;
+  /** Recording of the set, once there is one. */
+  recording?: string;
+  /** One short line under the details, e.g. "Closing set". */
+  note?: string;
+}

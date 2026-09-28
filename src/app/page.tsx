@@ -12,8 +12,10 @@ import { pillOutline, pillSolid } from "@/components/pill";
 import { PointerGlow } from "@/components/pointer-glow";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
+import { ShowList } from "@/components/show-list";
 import { StreamLinks } from "@/components/stream-links";
 import { TiltCard } from "@/components/tilt-card";
+import { shows } from "@/content/shows";
 import { site } from "@/content/site";
 import { artistName, artistOf, labelSince, sortedArtists } from "@/lib/artists";
 import { getCoverMedia } from "@/lib/covers";
@@ -27,10 +29,18 @@ import {
   releaseYear,
   sortedReleases,
 } from "@/lib/releases";
+import { splitShows } from "@/lib/shows";
 import { paletteVars } from "@/lib/theme";
+
+/** Re-render hourly so live dates move from upcoming to past on their own (see lib/shows.ts). */
+export const revalidate = 3600;
 
 export default async function HomePage() {
   const roster = sortedArtists;
+
+  // Next few dates; with nothing booked, the last night out and its recording.
+  const { upcoming: upcomingShows, past: pastShows } = splitShows(shows);
+  const homeShows = upcomingShows.length ? upcomingShows.slice(0, 3) : pastShows.slice(0, 1);
 
   const latest = latestRelease;
   const latestMedia = latest ? getCoverMedia(latest) : undefined;
@@ -232,6 +242,24 @@ export default async function HomePage() {
               );
             })}
           </ul>
+        </section>
+      ) : null}
+
+      {/* ── Live ───────────────────────────────────────────────────────── */}
+      {homeShows.length ? (
+        <section id="live" className="gutter py-16 md:py-24">
+          <Reveal className="flex flex-wrap items-end justify-between gap-6">
+            <SectionHeading label={upcomingShows.length ? "Next up" : "Last time out"} title="LIVE" />
+            <div className="mb-3 flex flex-col items-start gap-2 sm:items-end">
+              <p className="display text-[clamp(1.35rem,2.4vw,2.25rem)] leading-none text-accent">{site.live.tagline}</p>
+              <Link href="/live" className="label whitespace-nowrap underline-offset-4 hover:underline">
+                All dates →
+              </Link>
+            </div>
+          </Reveal>
+          <Reveal delay={0.1} className="mt-12">
+            <ShowList shows={homeShows} past={!upcomingShows.length} />
+          </Reveal>
         </section>
       ) : null}
 

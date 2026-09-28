@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ViewTransition, type CSSProperties } from "react";
+import { Fragment, ViewTransition, type CSSProperties } from "react";
 import { Blobs } from "@/components/blobs";
 import { CoverMedia } from "@/components/cover-media";
 import { ErrorBoundary } from "@/components/error-boundary";
@@ -11,6 +11,7 @@ import { pillOutline, pillSolid } from "@/components/pill";
 import { ReleaseCard } from "@/components/release-card";
 import { Reveal } from "@/components/reveal";
 import { SectionHeading } from "@/components/section-heading";
+import { ShowList } from "@/components/show-list";
 import { SoundCloudEmbed } from "@/components/soundcloud-embed";
 import { Swatches } from "@/components/swatches";
 import { TiltCard } from "@/components/tilt-card";
@@ -19,12 +20,16 @@ import { getArtistTheme } from "@/lib/artist-theme";
 import { adjacentArtists, artistSocials, getArtist, sortedArtists } from "@/lib/artists";
 import { getArtistMedia } from "@/lib/covers";
 import { longestWord, releasesByArtist } from "@/lib/releases";
+import { showsByArtist, splitShows } from "@/lib/shows";
 import { isSoundCloudUrl } from "@/lib/soundcloud";
 import { safeJsonLd } from "@/lib/utils";
 
 type Props = PageProps<"/artists/[slug]">;
 
 export const dynamicParams = false;
+
+/** Re-render hourly so live dates move from upcoming to past on their own (see lib/shows.ts). */
+export const revalidate = 3600;
 
 export function generateStaticParams() {
   return sortedArtists.map((a) => ({ slug: a.slug }));
@@ -81,6 +86,7 @@ export default async function ArtistPage({ params }: Props) {
   const { prev, next } = adjacentArtists(artist.slug);
   const genres = artist.genres ?? [];
   const bio = artist.bio ?? [];
+  const { upcoming, past } = splitShows(showsByArtist(artist.slug));
 
   const metaLine = [...genres.slice(0, 3), artist.since ? `since ${artist.since}` : undefined, site.name].filter(Boolean).join(" · ");
   const sectionTitle = "text-[clamp(2.5rem,7vw,6rem)]";
@@ -153,6 +159,50 @@ export default async function ArtistPage({ params }: Props) {
       </ul>
     </section>
   ) : null;
+
+  const liveSection = (
+    <section id="live" className="mt-20 scroll-mt-28">
+      <Reveal className="flex flex-wrap items-end justify-between gap-6">
+        <SectionHeading
+          label={upcoming.length ? `${upcoming.length} upcoming` : "On stage"}
+          title="LIVE"
+          titleClassName={sectionTitle}
+        />
+        <div className="mb-3 flex flex-col items-start gap-2 sm:items-end">
+          <p className="display text-[clamp(1.25rem,2.2vw,2rem)] leading-none text-accent">{site.live.tagline}</p>
+          <Link href="/live" className="label whitespace-nowrap underline-offset-4 hover:underline">
+            Whole label →
+          </Link>
+        </div>
+      </Reveal>
+      <Reveal className="mt-12 flex flex-col gap-12">
+        {upcoming.length ? (
+          <div>
+            <h3 className="label mb-4 text-muted">Upcoming</h3>
+            <ShowList shows={upcoming} headingAs="h4" />
+          </div>
+        ) : (
+          <p className="text-xl text-muted">{site.live.noDates}</p>
+        )}
+        {past.length ? (
+          <div>
+            <h3 className="label mb-4 text-muted">Past</h3>
+            <ShowList shows={past} past headingAs="h4" />
+          </div>
+        ) : null}
+      </Reveal>
+    </section>
+  );
+
+  // Whatever has something to show leads, upcoming dates first of all;
+  // sections with nothing in them yet sink to the bottom.
+  const sections = [
+    { key: "live", node: liveSection, rank: upcoming.length ? 0 : past.length ? 3 : 4 },
+    { key: "releases", node: releasesSection, rank: records.length ? 1 : 5 },
+    { key: "listen", node: listenSection, rank: 2 },
+  ]
+    .filter((s) => s.node)
+    .sort((a, b) => a.rank - b.rank);
 
   return (
     <PaletteScope palette={palette} className="relative min-h-[100svh] overflow-hidden">
@@ -245,18 +295,9 @@ export default async function ArtistPage({ params }: Props) {
           />
         </div>
 
-        {/* Records lead when there are any; otherwise the SoundCloud tracks do. */}
-        {records.length ? (
-          <>
-            {releasesSection}
-            {listenSection}
-          </>
-        ) : (
-          <>
-            {listenSection}
-            {releasesSection}
-          </>
-        )}
+        {sections.map((s) => (
+          <Fragment key={s.key}>{s.node}</Fragment>
+        ))}
 
         <Reveal className="mt-20 max-w-md">
           <h2 className="label mb-4 text-muted">Color world</h2>

@@ -1,6 +1,6 @@
 # OPERATION FAIRWAY — label site
 
-Record label site for **OPERATION FAIRWAY**: the roster (ojinyx, Random Thoth, the minimal musketeer), every release across it, merch and contact. Next.js 16 (App Router), deployed on Vercel at `operationfairway.org`. Built from the ojinyx artist site and sharing its design system, so the label and its artists read as one family.
+Record label site for **OPERATION FAIRWAY**: the roster (ojinyx, Random Thoth, the minimal musketeer), every release across it, live dates, merch and contact. Next.js 16 (App Router), deployed on Vercel at `operationfairway.org`. Built from the ojinyx artist site and sharing its design system, so the label and its artists read as one family.
 Loud on the surface, boring underneath: static pages, compositor-only animation, one native module at build time.
 
 ## House style
@@ -43,6 +43,7 @@ Everything editable lives in `src/content/`:
 - **`artists.ts`** — the roster. Name (in the artist's own case), tagline, bio, genres, `website`, `socials`, optional pinned `palette`, optional `image`/`imageVideo` overrides, and `tracks` for music hosted on SoundCloud (each becomes a click-to-load player on the artist page). `featured: true` pins an artist to the front; `since` shows the year they joined.
 - **`releases.ts`** — every record across the label, each with `artist: "<slug>"`. Dates, tracklists, streaming links, videos, credits. Undated releases show "Coming soon" and sort to the top. `featured: true` decides which of two same-day records leads. Set `label` only on a record that came out elsewhere; set `catalogNumber` to pin one.
 - **`merch.ts`** — one entry per product, each linking to where it is sold, with an optional `artist`.
+- **`shows.ts`** — live dates across the roster. Each night lists its `artists` (slugs), local `date`, `start` and `end` in 24-hour time, the venue's IANA `timeZone` (Alaska time when omitted), venue, city, an event `url` and, afterwards, a `recording`. A show is listed on `/live`, on each billed artist's page and on the home page. It counts as upcoming until its end time passes; an end earlier than the start runs past midnight.
 - **`site.ts`** — label name, legal name, URL, tagline, bio, location, email, contact copy, catalog prefix, storefront button, socials, nav, privacy date.
 
 The brand is plain `OPERATION FAIRWAY` everywhere a visitor reads it. The company name from the Alaska filing (`site.legalName`, "OPERATION FAIRWAY, LLC") appears only where the law cares: the copyright line in the footer and the Organization structured data, which also carries the formation date, the NAICS code and a city-level address. The registered street address is a home and is deliberately not on the site; `site.address` stops at city, state and country.
@@ -109,6 +110,7 @@ src/
     releases/             index + [slug] page + per-release opengraph-image
     merch/  contact/
     privacy/              plain-words privacy page; keep it in step with what the code does
+    live/                 upcoming and past shows, plus event structured data for upcoming ones
     api/contact/route.ts  form delivery (Resend REST API)
     opengraph-image.tsx   site-wide social card
     robots.ts sitemap.ts manifest.ts icon.svg apple-icon.png
@@ -125,6 +127,7 @@ src/
     palette-scope.tsx     scopes a palette to a subtree
     cover-media.tsx       poster + animated artwork (autoplay / in-view / hover, sound toggle)
     soundcloud-embed.tsx  click-to-load SoundCloud player
+    show-list.tsx         live dates as rows: date block, lineup, venue, times, links
     label-badge.tsx       rotating OPERATION FAIRWAY stamp
   content/                ← ALL editable content: site.ts artists.ts releases.ts merch.ts
     covers.generated.json manifest written by `npm run covers`
@@ -132,6 +135,8 @@ src/
     color.ts              OKLab/OKLCH + WCAG math (pure)
     palette.ts            artwork → theme (server only, sharp)
     artist-theme.ts       pinned palette or extracted, per artist (server only)
+    shows.ts              upcoming/past split, date and time formatting, MusicEvent data
+    zoned-time.ts         wall-clock times in a time zone, via Intl (pure, testable on its own)
     artists.ts releases.ts covers.ts soundcloud.ts youtube.ts og.tsx theme.ts utils.ts
 public/
   artists/                key art (poster + clip per artist)
@@ -151,6 +156,7 @@ Everything marked `TODO(label)` in `src/content/` is placeholder or unconfirmed.
 - **Add an artist**: add an entry to `src/content/artists.ts`. Drop key art in `_ANIMATIONS/<artist>/MAIN/DONE/` and run `npm run covers`, or set `image` to a content-hashed file under `/public/artists`. Leave `palette` off to theme from the art, or pin one.
 - **Add a release**: put the finished clip in `_ANIMATIONS/<ARTIST>/<ALBUM>/DONE/`, run `npm run covers`, add an entry with the matching slug and `artist` to `src/content/releases.ts`. The page, theme, OG image, catalog number and sitemap entry are generated. Titles go in allcaps. Leave `releaseDate` off until it's announced; undated releases show "Coming soon" and sort to the top.
 - **SoundCloud-only music**: add `tracks` to the artist (title, URL, year, optional artwork URL). Anything that isn't a `soundcloud.com` URL is dropped.
+- **Add a show**: one entry in `src/content/shows.ts` with times as the flyer prints them. Nothing needs moving after the night; within the hour it drops from Upcoming to Past on its own. Add the `recording` link when there is one and the past listing leads with "Watch the set". Upcoming shows with a venue and city are also published as schema.org `MusicEvent` data, which is what search engines use for event listings. The LIVE copy ("Raw. Live." and the lines under it) is `site.live` in `site.ts`.
 - **Merch**: `src/content/merch.ts`, one entry per product, each linking to where it is sold, with `artist` set to the slug it belongs to. Store product photos can go in as-is, white background and all: the card sets them on a light panel and blends the white away. Give image filenames a content hash, since `/merch` is cached immutably.
 - **Label bio, tagline, email, socials, contact copy**: `src/content/site.ts`. Set `catalogPrefix` to `""` to hide catalog numbers.
 
@@ -187,7 +193,7 @@ The repo lives at [crystalball-dev/operationfairway](https://github.com/crystalb
 
 What runs where:
 
-- All pages are **statically generated** at build (artist and release themes included).
+- All pages are **statically generated** at build (artist and release themes included). The home page, the artist pages and `/live` also re-render at most once an hour (ISR), so shows move from upcoming to past without a deploy. Those re-renders read artwork from disk for the palettes, which is why `outputFileTracingIncludes` in `next.config.ts` ships the posters with them.
 - `/api/contact` is the only server function.
 - Images go through Vercel's image CDN (AVIF/WebP, 31-day cache). `/covers/*`, `/artists/*.jpg|mp4`, `/brand/*` and `/merch/*` are served immutable; generated files carry a content hash, so re-running `npm run covers` after changing a clip produces new URLs automatically.
 - Video is served as static files from `public/` (range requests work out of the box). Cards use the silent 720² variant; release pages use the full clip, which starts loading only after the poster has painted. Phones get the small variant everywhere.
