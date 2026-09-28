@@ -76,9 +76,9 @@ export const site = {
   catalogPrefix: "OF",
   /** Genre tags for the label as a whole, used in structured data. */
   genres: ["Electronic", "Hip Hop & Rap", "Experimental"],
-  /** Label profiles. Entries with an empty href are dropped automatically. TODO(label): fill in. */
+  /** Label profiles. Entries with an empty href are dropped automatically. TODO(label): Bandcamp, SoundCloud and YouTube once they exist. */
   socials: [
-    { label: "Instagram", href: "" },
+    { label: "Instagram", href: "https://www.instagram.com/opfairway" },
     { label: "Bandcamp", href: "" },
     { label: "SoundCloud", href: "" },
     { label: "YouTube", href: "" },

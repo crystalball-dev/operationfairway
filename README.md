@@ -163,7 +163,7 @@ Everything marked `TODO(label)` in `src/content/` is placeholder or unconfirmed.
 
 What is still placeholder, as of the first build:
 
-- The label's own social profiles (all empty, so the "Elsewhere" blocks show "Links coming soon").
+- The label's other social profiles. Instagram is set; Bandcamp, SoundCloud and YouTube are empty in `site.socials` and stay hidden until filled in.
 - Random Thoth and the minimal musketeer: key art is a 500² SoundCloud image each. Neither has a release on the label yet, so their pages lead with their SoundCloud tracks.
 - Per-release descriptions.
 
