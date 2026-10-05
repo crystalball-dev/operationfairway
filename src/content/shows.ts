@@ -44,8 +44,7 @@ export const shows: Show[] = [
     start: "21:00",
     end: "22:00",
     timeZone: "America/Anchorage",
-    // Koot's, as everyone calls it.
-    venue: "Chilkoot Charlie's",
+    venue: "Chilkoot Charlie's (Koots)",
     address: "2435 Spenard Rd",
     city: "Anchorage",
     region: "AK",
