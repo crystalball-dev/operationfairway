@@ -16,19 +16,20 @@ export const RELEASE_TYPE_LABEL: Record<ReleaseType, string> = {
 const sortKey = (r: Release) => r.releaseDate ?? "9999-99-99";
 
 /**
- * Newest first, except that a `featured` release is pinned to the front.
- * Two records can share a release date, so the date alone can't decide which
- * one leads.
+ * Newest first. Records that share a release date can't be ordered by date
+ * alone, so a `featured` one leads its day; otherwise they keep their order
+ * in releases.ts (the sort is stable). KINGDOMS and THE HILLS share a day.
  */
-export const sortedReleases: Release[] = (() => {
-  const byDate = [...releases].sort((a, b) => sortKey(b).localeCompare(sortKey(a)));
-  const featuredIndex = byDate.findIndex((r) => r.featured);
-  if (featuredIndex <= 0) return byDate;
-  const [featured] = byDate.splice(featuredIndex, 1);
-  return [featured, ...byDate];
-})();
+export const sortedReleases: Release[] = [...releases].sort(
+  (a, b) => sortKey(b).localeCompare(sortKey(a)) || Number(Boolean(b.featured)) - Number(Boolean(a.featured)),
+);
 
 export const latestRelease: Release | undefined = sortedReleases[0];
+
+/** The title as the release itself has it, lead-in included: "The Random Thoth presents THE JOURNEY HOME". */
+export function fullTitle(release: Pick<Release, "title" | "titlePrefix">): string {
+  return release.titlePrefix ? `${release.titlePrefix} ${release.title}` : release.title;
+}
 
 export function getRelease(slug: string): Release | undefined {
   return releases.find((r) => r.slug === slug);

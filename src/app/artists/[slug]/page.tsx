@@ -19,7 +19,7 @@ import { site } from "@/content/site";
 import { getArtistTheme } from "@/lib/artist-theme";
 import { adjacentArtists, artistSocials, getArtist, sortedArtists } from "@/lib/artists";
 import { getArtistMedia } from "@/lib/covers";
-import { longestWord, releasesByArtist } from "@/lib/releases";
+import { fullTitle, longestWord, releasesByArtist } from "@/lib/releases";
 import { showsByArtist, splitShows } from "@/lib/shows";
 import { isSoundCloudUrl } from "@/lib/soundcloud";
 import { safeJsonLd } from "@/lib/utils";
@@ -101,7 +101,7 @@ export default async function ArtistPage({ params }: Props) {
     image: media.poster ? new URL(media.poster, site.url).toString() : undefined,
     memberOf: { "@type": "Organization", name: site.name, url: site.url },
     sameAs: [...socials.map((s) => s.href), ...(website ? [website] : [])],
-    album: records.map((r) => ({ "@type": "MusicAlbum", name: r.title, url: `${site.url}/releases/${r.slug}` })),
+    album: records.map((r) => ({ "@type": "MusicAlbum", name: fullTitle(r), url: `${site.url}/releases/${r.slug}` })),
     track: tracks.map((t) => ({ "@type": "MusicRecording", name: t.title, url: t.url })),
   };
 

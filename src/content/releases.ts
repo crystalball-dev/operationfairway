@@ -117,8 +117,32 @@ export const releases: Release[] = [
     ],
   },
 
-  // ── Random Thoth ────────────────────────────────────────────────────────
-  // TODO(label): add releases as `{ slug, title, artist: "random-thoth", … }`.
+  // ── The Random Thoth ────────────────────────────────────────────────────
+  {
+    slug: "the-journey-home",
+    titlePrefix: "The Random Thoth presents",
+    title: "THE JOURNEY HOME",
+    artist: "random-thoth",
+    type: "album",
+    releaseDate: "2026-10-04",
+    // "Release 05" on Bandcamp; pinned so earlier-dated additions can't renumber it.
+    catalogNumber: "OF005",
+    // Bandcamp first; add Spotify, Apple Music and the rest as the stores go live.
+    links: {
+      bandcamp: "https://therandomthoth.bandcamp.com/album/the-random-thoth-presents-the-journey-home",
+    },
+    tracks: [
+      { title: "THE AQUATIC PALACE", duration: "5:27" },
+      { title: "AFRICAN ROOTS", duration: "8:57" },
+      { title: "FIBER OPTICS", duration: "5:56" },
+      { title: "OCEAN FLOORS OF EUROPA", duration: "4:51" },
+      { title: "STELLAR TOUCH", duration: "7:00" },
+      { title: "CLUSTER 7", duration: "5:24" },
+      { title: "THE ORION NEBULA", duration: "5:57" },
+    ],
+    // From the Bandcamp credits, aliases only.
+    credits: ["The Random Thoth: producer, mixing", "ojinyx: mastering", "Kool Zainski: assistant engineer, AFRICAN ROOTS"],
+  },
 
   // ── the minimal musketeer ───────────────────────────────────────────────
   // TODO(label): add releases as `{ slug, title, artist: "the-minimal-musketeer", … }`.

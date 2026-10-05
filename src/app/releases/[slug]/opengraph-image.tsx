@@ -68,6 +68,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
               {ogMark(44, palette.fg)}
               <div style={{ display: "flex", fontSize: 20, letterSpacing: 5, color: palette.muted }}>{site.name}</div>
             </div>
+            {release?.titlePrefix ? <div style={{ display: "flex", fontSize: 26, color: palette.muted, marginBottom: -8 }}>{release.titlePrefix}</div> : null}
             <div
               style={{
                 display: "flex",

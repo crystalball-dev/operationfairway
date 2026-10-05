@@ -9,7 +9,7 @@ const nbsp = String.fromCharCode(0xa0);
  * House style, applied everywhere:
  *   • the label name is ALWAYS allcaps                → "OPERATION FAIRWAY"
  *   • record and song titles are ALWAYS allcaps       → "KINGDOMS", "THE HILLS"
- *   • each artist's name keeps the case THEY use      → "ojinyx", "Random Thoth"
+ *   • each artist's name keeps the case THEY use      → "ojinyx", "The Random Thoth"
  *
  * Nothing in the CSS forces a case, so what you type here is what renders.
  * `npm run dev` warns in the console if a release or track title breaks the
@@ -34,7 +34,7 @@ export const site = {
   tagline: "Records from the Zone.",
   /** SEO description (~150 chars). */
   description:
-    "OPERATION FAIRWAY is an independent record label out of Alaska. Home of ojinyx, Random Thoth and the minimal musketeer. Artists, releases, merch and contact.",
+    "OPERATION FAIRWAY is an independent record label out of Alaska. Home of ojinyx, The Random Thoth and the minimal musketeer. Artists, releases, merch and contact.",
   /**
    * Bio paragraphs, shown in the home page About section and in search
    * structured data. American English throughout. Each paragraph ends on a

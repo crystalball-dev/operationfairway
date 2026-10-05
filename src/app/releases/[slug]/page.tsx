@@ -20,6 +20,7 @@ import {
   RELEASE_TYPE_LABEL,
   adjacentReleases,
   catalogNumber,
+  fullTitle,
   formatReleaseDate,
   getRelease,
   longestWord,
@@ -43,14 +44,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const release = getRelease(slug);
   if (!release) return {};
   const by = artistName(release);
-  const description = release.description ?? `${release.title} — ${RELEASE_TYPE_LABEL[release.type]} by ${by}, released through ${releaseLabel(release)}.`;
+  const name = fullTitle(release);
+  const description = release.description ?? `${name} — ${RELEASE_TYPE_LABEL[release.type]} by ${by}, released through ${releaseLabel(release)}.`;
+  // A lead-in like "The Random Thoth presents" already names the artist, so "by …" would repeat it.
   return {
-    title: `${release.title} by ${by}`,
+    title: release.titlePrefix ? name : `${release.title} by ${by}`,
     description,
     alternates: { canonical: `/releases/${release.slug}` },
     openGraph: {
       type: "music.album",
-      title: `${release.title} — ${by}`,
+      title: release.titlePrefix ? name : `${release.title} — ${by}`,
       description,
       url: `/releases/${release.slug}`,
       releaseDate: release.releaseDate,
@@ -94,7 +97,7 @@ export default async function ReleasePage({ params }: Props) {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "MusicAlbum",
-    name: release.title,
+    name: fullTitle(release),
     albumReleaseType: typeLabel,
     datePublished: release.releaseDate,
     image: media.poster ? new URL(media.poster, site.url).toString() : undefined,
@@ -150,6 +153,9 @@ export default async function ReleasePage({ params }: Props) {
               {catalog ? `${catalog} · ` : ""}
               {typeLabel} · {formatReleaseDate(release.releaseDate)} · {imprint}
             </p>
+            {release.titlePrefix ? (
+              <p className="display -mb-4 text-[clamp(1.1rem,2.2vw,1.75rem)] leading-tight text-muted">{release.titlePrefix}</p>
+            ) : null}
             <h1
               className="display fit-title -ml-[0.04em]"
               style={{ "--letters": longestWord(release.title), "--fit-max": "clamp(3rem, 10vw, 9rem)" } as CSSProperties}

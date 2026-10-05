@@ -36,4 +36,19 @@ export const shows: Show[] = [
     url: "https://www.facebook.com/events/1921329685511366/",
     recording: "https://www.facebook.com/reel/1108826345162858/",
   },
+  {
+    id: "gnosis-2026-10-18",
+    name: "Gnosis",
+    artists: ["random-thoth", "the-minimal-musketeer"],
+    date: "2026-10-18",
+    start: "21:00",
+    end: "22:00",
+    timeZone: "America/Anchorage",
+    // Koot's, as everyone calls it.
+    venue: "Chilkoot Charlie's",
+    address: "2435 Spenard Rd",
+    city: "Anchorage",
+    region: "AK",
+    url: "https://koots.com/events",
+  },
 ];

@@ -1,6 +1,6 @@
 # OPERATION FAIRWAY — label site
 
-Record label site for **OPERATION FAIRWAY**: the roster (ojinyx, Random Thoth, the minimal musketeer), every release across it, live dates, merch and contact. Next.js 16 (App Router), deployed on Vercel at `operationfairway.org`. Built from the ojinyx artist site and sharing its design system, so the label and its artists read as one family.
+Record label site for **OPERATION FAIRWAY**: the roster (ojinyx, The Random Thoth, the minimal musketeer), every release across it, live dates, merch and contact. Next.js 16 (App Router), deployed on Vercel at `operationfairway.org`. Built from the ojinyx artist site and sharing its design system, so the label and its artists read as one family.
 Loud on the surface, boring underneath: static pages, compositor-only animation, one native module at build time.
 
 ## House style
@@ -11,7 +11,7 @@ Three rules, applied everywhere:
 | --- | --- |
 | The label name is **always allcaps** | `OPERATION FAIRWAY` |
 | Record and song titles are **always allcaps** | `KINGDOMS`, `THE HILLS`, `MARCH TO THE ACID STAR SHIP` |
-| Each artist's name keeps **the case they use** | `ojinyx`, `Random Thoth`, `the minimal musketeer` |
+| Each artist's name keeps **the case they use** | `ojinyx`, `The Random Thoth`, `the minimal musketeer` |
 
 The CSS does not force a case anywhere, so what you type in `src/content/` is what renders. `npm run dev` prints a console warning if a release or track title breaks the allcaps rule, or if a release points at an artist that doesn't exist.
 
@@ -41,7 +41,7 @@ No WebGL, no canvas loops, no scroll-jacking. Every continuous animation touches
 Everything editable lives in `src/content/`:
 
 - **`artists.ts`** — the roster. Name (in the artist's own case), tagline, bio, genres, `website`, `socials`, optional pinned `palette`, optional `image`/`imageVideo` overrides, and `tracks` for music hosted on SoundCloud (each becomes a click-to-load player on the artist page). `featured: true` pins an artist to the front; `since` shows the year they joined.
-- **`releases.ts`** — every record across the label, each with `artist: "<slug>"`. Dates, tracklists, streaming links, videos, credits. Undated releases show "Coming soon" and sort to the top. `featured: true` decides which of two same-day records leads. Set `label` only on a record that came out elsewhere; set `catalogNumber` to pin one.
+- **`releases.ts`** — every record across the label, each with `artist: "<slug>"`. Dates, tracklists, streaming links, videos, credits. Undated releases show "Coming soon" and sort to the top. `featured: true` decides which of two same-day records leads; a newer record still comes first. `titlePrefix` holds a lead-in that comes before the allcaps title on the release itself, like "The Random Thoth presents" before THE JOURNEY HOME; it shows above the title and is part of the page title and search data. Set `label` only on a record that came out elsewhere; set `catalogNumber` to pin one.
 - **`merch.ts`** — one entry per product, each linking to where it is sold, with an optional `artist`.
 - **`shows.ts`** — live dates across the roster. Each night lists its `artists` (slugs), local `date`, `start` and `end` in 24-hour time, the venue's IANA `timeZone` (Alaska time when omitted), venue, city, an event `url` and, afterwards, a `recording`. A show is listed on `/live`, on each billed artist's page and on the home page. It counts as upcoming until its end time passes; an end earlier than the start runs past midnight.
 - **`site.ts`** — label name, legal name, URL, tagline, bio, location, email, contact copy, catalog prefix, storefront button, socials, nav, privacy date.
@@ -51,7 +51,7 @@ The brand is plain `OPERATION FAIRWAY` everywhere a visitor reads it. The compan
 
 ## Artwork pipeline: `_ANIMATIONS` → site
 
-Source clips live in `_ANIMATIONS/` (git-ignored). The convention is artist first, then record:
+Source clips live in `_ANIMATIONS/`. Like every top-level folder whose name starts with an underscore (`_Random Thoth/`, say), it is git-ignored, so masters never reach the repo. The convention is artist first, then record:
 
 ```
 _ANIMATIONS/
@@ -86,7 +86,7 @@ The ojinyx covers and key art in this repo were imported from the ojinyx site wi
 5. In OKLCH, derive `bg`, `fg`, `muted`, `accent`, `accent2`, `accent3`. Bright artwork gets a light theme, dark artwork a dark one. Every text/accent color is nudged until it clears WCAG contrast against `bg` (7:1 body, 4.5:1 muted, 3:1 accents).
 6. A 16 px WebP blur placeholder is generated in the same pass for `next/image`.
 
-An artist with `palette` set in `artists.ts` skips steps 3–5 and uses those colors as written (ojinyx uses the brand colors from ojinyx.com; Random Thoth's placeholder art is grayscale). The result is written as CSS custom properties on a wrapper (`<PaletteScope>`), so every Tailwind token (`bg-bg`, `text-accent`, …) re-resolves inside it. Blobs, marquee, buttons, `<meta name="theme-color">` and the Open Graph card all use the same palette.
+An artist with `palette` set in `artists.ts` skips steps 3–5 and uses those colors as written (ojinyx uses the brand colors from ojinyx.com; The Random Thoth's placeholder art is grayscale). The result is written as CSS custom properties on a wrapper (`<PaletteScope>`), so every Tailwind token (`bg-bg`, `text-accent`, …) re-resolves inside it. Blobs, marquee, buttons, `<meta name="theme-color">` and the Open Graph card all use the same palette.
 
 **If anything fails** (missing file, corrupt image, network) the label palette is used and a warning is logged at build. The page still renders.
 
@@ -164,7 +164,8 @@ Everything marked `TODO(label)` in `src/content/` is placeholder or unconfirmed.
 What is still placeholder, as of the first build:
 
 - The label's other social profiles. Instagram is set; Bandcamp, SoundCloud and YouTube are empty in `site.socials` and stay hidden until filled in.
-- Random Thoth and the minimal musketeer: key art is a 500² SoundCloud image each. Neither has a release on the label yet, so their pages lead with their SoundCloud tracks.
+- The Random Thoth and the minimal musketeer: key art is a 500² SoundCloud image each. The minimal musketeer has no release on the label yet, so that page leads with SoundCloud tracks.
+- THE JOURNEY HOME links to Bandcamp only; add Spotify, Apple Music and the rest to its `links` in `releases.ts` as the stores go live.
 - Per-release descriptions.
 
 ## Local development
@@ -208,7 +209,7 @@ What runs where:
 
 ## Recommended next steps (not built, on purpose)
 
-- **Proper key art** for Random Thoth and the minimal musketeer (1080² clips through `npm run covers`), which also lets their palettes be extracted rather than pinned.
+- **Proper key art** for The Random Thoth and the minimal musketeer (1080² clips through `npm run covers`), which also lets their palettes be extracted rather than pinned.
 - **First label releases for the new artists** — add them to `releases.ts` once they're announced; undated entries show as "Coming soon".
 - **Mailing list** — one field posting to Buttondown/Resend Audiences; the contact route already has the delivery plumbing.
 - **Label socials** — fill `site.socials` and the "Elsewhere" blocks light up everywhere.

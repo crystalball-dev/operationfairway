@@ -173,6 +173,9 @@ export default async function HomePage() {
                 {latestCatalog ? `${latestCatalog} · ` : ""}
                 {latest.releaseDate ? "Latest" : "Next"} {RELEASE_TYPE_LABEL[latest.type]} · {formatReleaseDate(latest.releaseDate)}
               </span>
+              {latest.titlePrefix ? (
+                <p className="display -mb-3 text-[clamp(1.1rem,2vw,1.6rem)] leading-tight text-muted">{latest.titlePrefix}</p>
+              ) : null}
               <div style={{ containerType: "inline-size" }}>
                 <h2
                   className="display fit-title"

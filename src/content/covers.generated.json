@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-24T00:00:00.000Z",
+  "generatedAt": "2026-10-05T22:45:47.409Z",
   "artists": {
     "ojinyx": {
       "source": "_ANIMATIONS/ojinyx/MAIN/DONE/MAIN_2.mp4",
@@ -81,6 +81,24 @@
         "mp4": 5494236,
         "mp4Small": 589271,
         "poster": 615510
+      }
+    },
+    "the-journey-home": {
+      "source": "_ANIMATIONS/random-thoth/THE JOURNEY HOME/DONE/album animation.mp4",
+      "hash": "51041dad",
+      "width": 4000,
+      "height": 4000,
+      "duration": 12.01,
+      "hasAudio": true,
+      "poster": "/covers/the-journey-home.51041dad.jpg",
+      "mp4": "/covers/the-journey-home.51041dad.mp4",
+      "webm": "/covers/the-journey-home.51041dad.webm",
+      "mp4Small": "/covers/the-journey-home-sm.51041dad.mp4",
+      "bytes": {
+        "mp4": 2425677,
+        "webm": 1391734,
+        "mp4Small": 310037,
+        "poster": 213472
       }
     }
   }

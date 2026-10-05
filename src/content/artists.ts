@@ -5,7 +5,7 @@ import type { Artist } from "./types";
  * ─────────────────────────────────────────────────────────────────────────
  * House style: each artist's name is written exactly as they write it.
  * Nothing in the CSS forces a case, so "ojinyx" stays lowercase and
- * "Random Thoth" keeps its capitals. Record and song titles are allcaps
+ * "The Random Thoth" keeps its capitals. Record and song titles are allcaps
  * everywhere.
  *
  * Key art comes from `npm run covers`, which reads
@@ -51,11 +51,12 @@ export const artists: Artist[] = [
   },
   {
     slug: "random-thoth",
-    name: "Random Thoth",
+    /** Credited as "The Random Thoth" on Bandcamp and in stores since THE JOURNEY HOME. The slug stays, so links keep working. */
+    name: "The Random Thoth",
     // Bio written by the label, 2026-09-24. Keep verbatim.
     tagline: "Acid, the slow burn.",
     bio: [
-      "Random Thoth is acid techno buffed and polished. Warm TB-303 lines. Old-school drum machines. A head full of Detroit.",
+      "The Random Thoth is acid techno buffed and polished. Warm TB-303 lines. Old-school drum machines. A head full of Detroit.",
       "Forged in Dallas, now coming at you live from Anchorage, Alaska.",
       "Loud by default.",
     ],
@@ -74,6 +75,7 @@ export const artists: Artist[] = [
       accent3: "#7a4dff",
     },
     socials: [
+      { label: "Bandcamp", href: "https://therandomthoth.bandcamp.com" },
       { label: "SoundCloud", href: "https://soundcloud.com/noah-lott" },
       { label: "YouTube", href: "https://www.youtube.com/@bouncelectric303" },
     ],

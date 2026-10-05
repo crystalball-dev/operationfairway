@@ -47,3 +47,7 @@ next-env.d.ts
 /_ANIMATIONS/
 
 .vercel
+
+# Source art folders at the top level start with an underscore (_ANIMATIONS,
+# per-artist drops like "_Random Thoth") and stay out of the deploy repo.
+/_*/

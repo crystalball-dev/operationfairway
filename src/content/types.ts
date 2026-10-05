@@ -107,7 +107,7 @@ export interface Artist {
   slug: string;
   /**
    * The name exactly as the artist writes it. Nothing forces a case, so
-   * "ojinyx" stays lowercase and "Random Thoth" keeps its capitals.
+   * "ojinyx" stays lowercase and "The Random Thoth" keeps its capitals.
    */
   name: string;
   /** One line under the name on the roster and the artist page. */
@@ -150,15 +150,21 @@ export interface Release {
   slug: string;
   /** House style: record titles are allcaps, e.g. "KINGDOMS". */
   title: string;
+  /**
+   * Words that come before the title on the release itself, in the artist's
+   * own case: "The Random Thoth presents". Shown as a lead-in above the title
+   * on the release page and the home page, and part of the page title and
+   * search data. The allcaps `title` stays the headline everywhere.
+   */
+  titlePrefix?: string;
   /** Slug of the artist in src/content/artists.ts. */
   artist: string;
   type: ReleaseType;
   /** ISO date, e.g. "2026-03-14". Drives ordering (newest first); omit for "TBA", which sorts to the top. */
   releaseDate?: string;
   /**
-   * Pin this release to the top of the discography and to the home page
-   * slot. Use when two records share a release date and one should lead.
-   * Only the first featured release wins.
+   * Lead the other releases that share its release date, on the home page
+   * and at the top of the discography. A newer release still comes first.
    */
   featured?: boolean;
   /** Poster override. Defaults to the frame extracted by `npm run covers`. "/covers/x.jpg" under /public or an absolute https URL. */
