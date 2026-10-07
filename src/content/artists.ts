@@ -75,6 +75,8 @@ export const artists: Artist[] = [
       accent3: "#7a4dff",
     },
     socials: [
+      { label: "Spotify", href: "https://open.spotify.com/artist/2dhigUJUiG1WMzL4pDTNKX" },
+      { label: "Apple Music", href: "https://music.apple.com/artist/the-random-thoth/6819083961" },
       { label: "Bandcamp", href: "https://therandomthoth.bandcamp.com" },
       { label: "SoundCloud", href: "https://soundcloud.com/noah-lott" },
       { label: "YouTube", href: "https://www.youtube.com/@bouncelectric303" },

@@ -127,9 +127,15 @@ export const releases: Release[] = [
     releaseDate: "2026-10-04",
     // "Release 05" on Bandcamp; pinned so earlier-dated additions can't renumber it.
     catalogNumber: "OF005",
-    // Bandcamp first; add Spotify, Apple Music and the rest as the stores go live.
+    // Each checked against the tracklist and "℗ 2026 OPERATION FAIRWAY, LLC", 2026-10-06. UPC 859748007570.
     links: {
+      spotify: "https://open.spotify.com/album/1U9q7Ffa6ZGx7RO3aTVD2g",
+      apple: "https://music.apple.com/album/the-random-thoth-presents-the-journey-home/6819329025",
+      youtubeMusic: "https://music.youtube.com/browse/MPREb_d8eAEFHHudP",
       bandcamp: "https://therandomthoth.bandcamp.com/album/the-random-thoth-presents-the-journey-home",
+      tidal: "https://tidal.com/album/567235465",
+      deezer: "https://www.deezer.com/album/1114006512",
+      amazon: "https://music.amazon.com/albums/B0HLZNWFGD",
     },
     tracks: [
       { title: "THE AQUATIC PALACE", duration: "5:27" },

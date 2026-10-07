@@ -165,7 +165,6 @@ What is still placeholder, as of the first build:
 
 - The label's other social profiles. Instagram is set; Bandcamp, SoundCloud and YouTube are empty in `site.socials` and stay hidden until filled in.
 - The Random Thoth and the minimal musketeer: key art is a 500² SoundCloud image each. The minimal musketeer has no release on the label yet, so that page leads with SoundCloud tracks.
-- THE JOURNEY HOME links to Bandcamp only; add Spotify, Apple Music and the rest to its `links` in `releases.ts` as the stores go live.
 - Per-release descriptions.
 
 ## Local development
